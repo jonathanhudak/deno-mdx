@@ -7,6 +7,7 @@
         "react-dom/server": "https://esm.sh/react-dom@18.1.0/server",
         "react/jsx-runtime": "https://esm.sh/react@18.1.0/jsx-runtime",
         "remark-codesandbox": "https://esm.sh/remark-codesandbox",
-        "rehype-prism": "https://esm.sh/@mapbox/rehype-prism"
+        "rehype-prism": "https://esm.sh/@mapbox/rehype-prism",
+        "mdxToHTML": "./mdxToHTML.tsx"
     }
 }

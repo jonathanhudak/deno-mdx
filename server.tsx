@@ -1,11 +1,5 @@
 import { serve } from "https://deno.land/std@0.140.0/http/server.ts";
-import * as React from "react";
-import * as ReactDOMServer from "react-dom/server";
-import { run, compile } from "@mdx-js/mdx";
-import { makeHTMLPage } from "html_page";
-import * as runtime from "react/jsx-runtime";
-import codesandboxPlugin from "remark-codesandbox";
-import prismPlugin from "rehype-prism";
+import mdxToHTML from "mdxToHTML";
 
 // // https://github.com/mdx-js/mdx/tree/main/packages/mdx
 
@@ -26,36 +20,30 @@ ReactDOM.render(
 \`\`\`
 `;
 
-const MDXSrc = await compile(MDXFile, {
-  outputFormat: "function-body",
-  remarkPlugins: [[codesandboxPlugin, { mode: "button" }]],
-  rehypePlugins: [prismPlugin],
-});
-
-const { default: MDXComponent } = await run(MDXSrc.value, runtime);
-
-const body = ReactDOMServer.renderToString(<MDXComponent />);
+const html: string = await mdxToHTML(MDXFile);
 
 serve(
-  (req) => {
+  async (req) => {
     const url = new URL(req.url);
+    const { pathname } = url;
 
-    switch (url.pathname) {
-      default:
-        return new Response(
-          makeHTMLPage({
-            head: "<link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/prism/9000.0.1/themes/prism-tomorrow.css' />",
-            title: "Compile MDX",
-            body,
-          }),
-          {
-            status: 200,
-            headers: {
-              "content-type": "text/html",
-            },
-          }
-        );
+    if (pathname === "/mdx-to-html" && req.method === "POST") {
+      const mdx = await req.text();
+      console.debug(mdx);
+      return new Response(await mdxToHTML(mdx), {
+        status: 200,
+        headers: {
+          "content-type": "application/json",
+        },
+      });
     }
+
+    return new Response("API Index", {
+      status: 200,
+      headers: {
+        "content-type": "text/html",
+      },
+    });
   },
   {
     port: 8005,
