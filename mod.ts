@@ -1,1 +1,1 @@
-export * from "./index.bundle.ts";
+export mdxToHTML from "./index.bundle.ts";

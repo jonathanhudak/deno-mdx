@@ -1,5 +1,5 @@
 import { serve } from "https://deno.land/std@0.140.0/http/server.ts";
-import mdxToHTML from "mdxToHTML";
+import mdxToHTML from "https://deno.land/x/mdx_to_html/mod.ts";
 
 // // https://github.com/mdx-js/mdx/tree/main/packages/mdx
 
@@ -38,7 +38,7 @@ serve(
       });
     }
 
-    return new Response("API Index", {
+    return new Response(await mdxToHTML(MDXFile), {
       status: 200,
       headers: {
         "content-type": "text/html",
