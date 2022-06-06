@@ -1,6 +1,6 @@
 {
     "tasks": {
         "dev": "deno run --watch --allow-net --no-check --import-map=importMap.json server.tsx",
-        "bundle": "deno bundle --import-map=importMap.json server.tsx server.bundle.tsx"
+        "bundle": "deno bundle --import-map=importMap.json mdxToHTML.tsx index.bundle.ts"
     }
 }
