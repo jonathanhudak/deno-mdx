@@ -5,7 +5,7 @@ Work in progress. Explorations of converting .mdx files into static HTML
 Other deno modules probably do this much better.
 
 ```ts
-import { mdxToHTML } from 'https://deno.land/x/mdx_to_html';
+import { mdxToHTML } from "https://deno.land/x/mdx_to_html/mod.ts";
 
 const mdxSrc = `
 export const Thing = () => <>World!</>
