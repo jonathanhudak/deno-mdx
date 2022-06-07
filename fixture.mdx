@@ -1,0 +1,15 @@
+export const Thing = ({ Tag = "span" }) => <Tag>World!</Tag>;
+
+# Hello, <Thing Tag="strong" />
+
+# Hello, <Thing Tag="marquee" />
+
+```js codesandbox=react
+import React from "react";
+import ReactDOM from "react-dom";
+
+ReactDOM.render(
+  <h1>Hello remark-codesandbox!</h1>,
+  document.getElementById("root")
+);
+```
